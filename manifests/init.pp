@@ -1,4 +1,4 @@
-class laravel {
+class codeigniter {
   exec { 'download-codeigniter':
     cwd     => '/tmp',
     command => '/usr/bin/wget http://ellislab.com/codeigniter/download',
