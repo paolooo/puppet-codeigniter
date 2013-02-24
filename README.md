@@ -1,10 +1,10 @@
-Puppet Module Laravel
-=====================
+Puppet Module Codeigniter
+=========================
 by Nino Paolo Amarillento
 
-Puppet Module for the latest version of Laravel - PHP Framework.
+Puppet Module for the latest version of  Codeigniter - PHP Framework.
 
-As of Feb 15, 2013 - this will download <strong>Laravel 4</strong>
+As of Feb 25, 2013 - this will download <strong>Codeigniter 2.1.3</strong>
 
 
 Installation
@@ -17,13 +17,4 @@ I assumed that you have Vagrant environment already, or if you don't have one ye
 
 If you are using my [vagrant-lamp](http://github.com/paolooo/vagrant-lamp)    
 
-* `cd puppet`   
-* `git submodule add https://github.com/paolooo/puppet-laravel.git modules/laravel`
-
-Or, using `-f`
-
-* `git submodule add -f https://github.com/paolooo/puppet-laravel.git puppet/modules/laravel`
-    
-Or, if you're not using [vagrant-lamp](http://github.com/paolooo/vagrant-lamp) and just your git repo you can do the ff command.    
-
-* `git submodule add https://github.com/paolooo/puppet-laravel.git puppet/modules/laravel`
+* `git submodule add https://github.com/paolooo/puppet-codeigniter.git extras/modules/codeigniter`
