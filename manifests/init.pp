@@ -1,33 +1,29 @@
 class codeigniter {
-  exec { 'download-codeigniter':
-    cwd     => '/tmp',
-    command => '/usr/bin/wget http://ellislab.com/codeigniter/download',
-    creates => '/tmp/download.zip'
-  }
-  
-  exec { 'unzip-codeigniter':
-    cwd     => '/tmp',
-    command => "/usr/bin/unzip download.zip && /bin/mv Codeigniter_*/* ${docroot}",
-    require => [ Package['unzip'], Exec['download-codeigniter'] ]
-  }
+  $root = $docroot
+) {
 
-  file { "${docroot}":
+  file { "${root}":
     ensure  => 'directory'
   }
 
-  #$writeable_dirs = ["${docroot}/app/storage"]
-  #file { "${writeable_dirs}":
-  #  ensure  => 'directory',
-  #  recurse => true,
-  #  mode    => '0777',
-  #  require => File["${docroot}"]
-  #}
-
-  # add .htaccess
-  file { 'add-htaccess':
-    path    => "${docroot}/.htaccess",
-    content => template('codeigniter/.htaccess'),
-    ensure  => file,
-    require => [ Exec['unzip-codeigniter'] ]
+  exec { 'download-codeigniter':
+    cwd     => '/tmp',
+    command => '/usr/bin/wget http://ellislab.com/codeigniter/download',
+    creates => '/tmp/download'
   }
+
+  
+  exec { 'unzip-codeigniter':
+    cwd     => '/tmp',
+    command => "/usr/bin/unzip download && /bin/cp -R CodeIgniter_*/* ${root} && /bin/rm -rf download Codeigniter_*",
+    require => [ File["${root}"], Package['unzip'], Exec['download-codeigniter'] ]
+  }
+
+  # http://getsparks.org/install
+  exec { 'install-sparks':
+    cwd     => "${root}",
+    command => '/usr/bin/php -r "$(curl -fsSL http://getsparks.org/go-sparks)"',
+    require => [ Package['php5-cli'], File["${root}"], ],
+  }
+
 }
