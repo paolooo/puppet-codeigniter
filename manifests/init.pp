@@ -1,4 +1,4 @@
-class codeigniter {
+class codeigniter (
   $root = $docroot
 ) {
 
